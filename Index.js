@@ -28,6 +28,26 @@ api.Create("accounts", account).then(
       function (result) {
         accountID = result;
         console.log("Account data " + JSON.stringify(result));
+
+        //Account update
+        var updateAccount = { name: "Updated Name " };
+        api.Update("accounts", accountID, updateAccount).then(
+          function (result) {
+            console.log("Update Result " + JSON.stringify(result));
+
+            //Account Record delete
+            api.Delete('accounts',accountID).then(
+                function(result) {
+                    console.log(result);
+                },function(error) {
+                    console.log(error)
+                }
+            );
+          },
+          function (error) {
+            console.log(error);
+          }
+        );
       },
       function (error) {
         console.log(error);
